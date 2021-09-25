@@ -6,11 +6,12 @@
 /*   By: peduardo < peduardo@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 20:55:59 by peduardo          #+#    #+#             */
-/*   Updated: 2021/09/19 23:10:42 by peduardo         ###   ########.fr       */
+/*   Updated: 2021/09/25 11:12:58 by peduardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static void	partwrite_action(char **result_line, char *curr_read, int i)
 {
@@ -28,7 +29,7 @@ static void	partwrite_action(char **result_line, char *curr_read, int i)
 	{
 		holder = curr_read[i + 1];
 		curr_read[i + 1] = '\0';
-		aux = ft_strdup(*result_line);
+		aux = *result_line;
 		*result_line = ft_strjoin(aux, curr_read);
 		curr_read[i + 1] = holder;
 		free(aux);
@@ -52,6 +53,7 @@ static void	partwrite(char *curr_read, char **result_line, int *bytes_read)
 	i++;
 	ft_memmove(curr_read, &curr_read[i], BUFFER_SIZE - i);
 	curr_read[BUFFER_SIZE - i] = '\0';
+	//printf("%s is the string", curr_read);
 }
 
 static void	fullwrite(char *curr_read, char **result_line)
@@ -62,11 +64,12 @@ static void	fullwrite(char *curr_read, char **result_line)
 		*result_line = ft_strjoin(curr_read, "");
 	else
 	{
-		aux = ft_strdup(*result_line);
+		aux = *result_line;
 		*result_line = ft_strjoin(aux, curr_read);
 		free(aux);
 	}
 	curr_read[0] = '\0';
+	//printf("%s is the string", curr_read);
 }
 
 char	*get_next_line(int fd)
@@ -76,9 +79,9 @@ char	*get_next_line(int fd)
 	int			bytes_read;
 
 	result_line = NULL;
+	bytes_read = 1;
 	if (*curr_read)
 		partwrite(curr_read, &result_line, &bytes_read);
-	bytes_read = 1;
 	while (bytes_read)
 	{
 		bytes_read = read(fd, curr_read, BUFFER_SIZE);
