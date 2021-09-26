@@ -6,7 +6,7 @@
 /*   By: peduardo < peduardo@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 20:55:59 by peduardo          #+#    #+#             */
-/*   Updated: 2021/09/25 11:12:58 by peduardo         ###   ########.fr       */
+/*   Updated: 2021/09/26 01:57:40 by peduardo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void	partwrite(char *curr_read, char **result_line, int *bytes_read)
 	i++;
 	ft_memmove(curr_read, &curr_read[i], BUFFER_SIZE - i);
 	curr_read[BUFFER_SIZE - i] = '\0';
-	//printf("%s is the string", curr_read);
 }
 
 static void	fullwrite(char *curr_read, char **result_line)
@@ -69,7 +68,6 @@ static void	fullwrite(char *curr_read, char **result_line)
 		free(aux);
 	}
 	curr_read[0] = '\0';
-	//printf("%s is the string", curr_read);
 }
 
 char	*get_next_line(int fd)
